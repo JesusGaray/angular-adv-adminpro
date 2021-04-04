@@ -62,17 +62,15 @@ export class LoginComponent implements OnInit{
   }
 
   async startApp() {
-    this.usuarioService.googleInit();
+    await this.usuarioService.googleInit();
     this.auth2=this.usuarioService.auth2;
-
-      this.attachSignin(document.getElementById('google-btn'));
-  }
+    this.attachSignin(document.getElementById('my-signin2'));
+  };
 
   attachSignin(element) {
     this.auth2.attachClickHandler(element, {},
         (googleUser)=> {
           const id_token = googleUser.getAuthResponse().id_token;
-          //console.log(id_token);
           this.usuarioService.loginGoogle(id_token)
             .subscribe(resp=>{
               // mover al dashboard

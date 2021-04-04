@@ -5,6 +5,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { DashoardComponent } from './dashoard/dashoard.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { PagesComponent } from './pages.component';
+import { PerfilComponent } from './perfil/perfil.component';
 import { ProgressComponent } from './progress/progress.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
@@ -16,11 +17,12 @@ const routes:Routes=[
         canActivate:[AuthGuard],
         children:[
         {path:'', component:DashoardComponent,data:{titulo:'Dashboard'}},
-        {path:'progress', component:ProgressComponent,data:{titulo:'Progress'}},
+        {path:'account-settings', component:AccountSettingsComponent,data:{titulo:'Ajustes de cuentas'}},
         {path:'grafica1', component:Grafica1Component,data:{titulo:'Grafica #1'}},
+        {path:'progress', component:ProgressComponent,data:{titulo:'Progress'}},
         {path:'promesas', component:PromesasComponent,data:{titulo:'Promesas'}},
         {path:'rxjs', component:RxjsComponent,data:{titulo:'RxJs'}},
-        {path:'account-settings', component:AccountSettingsComponent,data:{titulo:'Ajustes de cuentas'}}
+        {path:'perfil', component:PerfilComponent,data:{titulo:'Perfil de usuario gaD'}},
             
     ]
 
