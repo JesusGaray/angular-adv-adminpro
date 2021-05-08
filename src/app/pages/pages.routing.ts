@@ -4,6 +4,9 @@ import { AuthGuard } from '../guards/auth.guard';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { DashoardComponent } from './dashoard/dashoard.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
+import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
+import { MedicoComponent } from './mantenimientos/medicos/medico.component';
+import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 import { PagesComponent } from './pages.component';
 import { PerfilComponent } from './perfil/perfil.component';
@@ -27,6 +30,9 @@ const routes:Routes=[
 
         //Mantenimientos
         {path:'usuarios', component:UsuariosComponent,data:{titulo:'Usuarios de aplicacion gaD'}},
+        {path:'hospitales', component:HospitalesComponent,data:{titulo:'Hospitales de aplicacion gaD'}},
+        {path:'medicos', component:MedicosComponent,data:{titulo:'Mantenimiento de medicos gaD'}},
+        {path:'medico/:id', component:MedicoComponent,data:{titulo:'Mantenimiento de medicos gaD'}},
     ]
 
     },
