@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit{
           //TODO mover al dashboard
           this.router.navigateByUrl('/');
         },(err)=>{
+          console.log(err);
           Swal.fire('Error', err.error.msg,'error');
         });
     // console.log(this.loginForm.value);

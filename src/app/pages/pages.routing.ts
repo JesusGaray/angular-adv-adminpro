@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+import { AdminGuard } from '../guards/admin.guard';
 import { AuthGuard } from '../guards/auth.guard';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 import { DashoardComponent } from './dashoard/dashoard.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
@@ -27,12 +29,15 @@ const routes:Routes=[
         {path:'promesas', component:PromesasComponent,data:{titulo:'Promesas'}},
         {path:'rxjs', component:RxjsComponent,data:{titulo:'RxJs'}},
         {path:'perfil', component:PerfilComponent,data:{titulo:'Perfil de usuario gaD'}},
+        {path:'buscar/:termino', component:BusquedaComponent,data:{titulo:'Busquedas gaD'}},
 
         //Mantenimientos
-        {path:'usuarios', component:UsuariosComponent,data:{titulo:'Usuarios de aplicacion gaD'}},
         {path:'hospitales', component:HospitalesComponent,data:{titulo:'Hospitales de aplicacion gaD'}},
         {path:'medicos', component:MedicosComponent,data:{titulo:'Mantenimiento de medicos gaD'}},
         {path:'medico/:id', component:MedicoComponent,data:{titulo:'Mantenimiento de medicos gaD'}},
+        
+        //Rutas Admin
+        {path:'usuarios',canActivate:[AdminGuard], component:UsuariosComponent,data:{titulo:'Usuarios de aplicacion gaD'}},
     ]
 
     },

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, JsonpInterceptor } from '@angular/common/http';
 import { catchError, delay, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -30,6 +30,9 @@ export class UsuarioService {
     return localStorage.getItem('token') || '';
   }
 
+  get role():'ADMIN_ROLE'|'USER_ROLE'{
+    return this.usuario.role;
+  }
   get uid():string{
     return this.usuario.uid || '';
   }
@@ -61,9 +64,16 @@ export class UsuarioService {
 
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
 
     this.auth2.signOut().then(()=> {
     });
+  }
+
+  guardarLocalStorage(token:string,menu:any){
+    localStorage.setItem('token',token);
+    localStorage.setItem('menu',JSON.stringify(menu));
+   
   }
 
   validarToken():Observable<boolean>{
@@ -83,7 +93,9 @@ export class UsuarioService {
         }=resp.usuarioDB;
 
         this.usuario=new Usuario(nombre,email,'',img,google,role,uid);
-        localStorage.setItem('token',resp.token);
+        
+        this.guardarLocalStorage(resp.token,resp.menu);
+
       }),
       map(resp=>true),
       catchError(error=>of(false))
@@ -94,7 +106,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/usuarios`,formData)
               .pipe(
                 tap((resp:any)=>{
-                  localStorage.setItem('token',resp.token);
+                  this.guardarLocalStorage(resp.token,resp.menu);
                 })
               );
 
@@ -112,9 +124,11 @@ export class UsuarioService {
     return this.http.post(`${base_url}/login`,formData)
       .pipe(
         tap((resp:any)=>{
-          localStorage.setItem('token',resp.token);
+          this.guardarLocalStorage(resp.token,resp.menu);
         })
       );
+
+    
 
   }
 
@@ -122,7 +136,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/login/google`,{token})
       .pipe(
         tap((resp:any)=>{
-          localStorage.setItem('token',resp.token);
+          this.guardarLocalStorage(resp.token,resp.menu);
         })
       );
 
